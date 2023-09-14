@@ -532,12 +532,11 @@ if(nrow(dt_str_mstr[which(dt_str_mstr$festival=="dc"),])!=0)
 #getting the store-coefficients for dc stores
 dc_coeff<- COEFFICIENTS_CALCULATE(dt_training_features[which(dt_training_features$site_code 
                                                              %in% (dt_str_mstr[which(dt_str_mstr$festival=="dc"),]$site_code)),-c("pujo")])
-dc_strs_fcst<- P2P_STR_ADJUSTED_SALES(main_festivals, dt_test_features, dc_coeff)
 
-dc_strs_fcst[is.na(dc_strs_fcst$p2p_adjusted_sales),"p2p_adjusted_sales"]<- dc_strs_fcst[is.na(dc_strs_fcst$p2p_adjusted_sales),"sales_rev"]
 #rename the columns to more understandable format
 dc_coeff<- RENAME_FESTIVAL_COEFF_TBL(dc_coeff)
 dc_strs_fcst<-  P2P_STR_ADJUSTED_SALES(main_festivals, dt_test_features, dc_coeff)
+dc_strs_fcst[is.na(dc_strs_fcst$p2p_adjusted_sales),"p2p_adjusted_sales"]<- dc_strs_fcst[is.na(dc_strs_fcst$p2p_adjusted_sales),"sales_rev"]
 }
 if(nrow(dt_str_mstr[which(dt_str_mstr$festival=="pdc"),])!=0)
 {
